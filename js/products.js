@@ -75,7 +75,7 @@ const printProducts = (productsArray, wrapperId) => {
         wrapper.append(createProductCard(product));
     });
 };
-
+//https://stackoverflow.com/questions/56461743/getting-object-htmldivelement-instead-of-its-content
 
 const printAllProducts = async () => {
     let productsArray = await fetchAllProducts();
