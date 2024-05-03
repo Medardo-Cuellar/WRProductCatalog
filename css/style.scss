@@ -1,0 +1,12 @@
+$primary-color: #e4a334;
+$secondary-color: #d22825;
+$background-color: #332c29;
+$background-color-secondary: #5a3f22;
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+  color: $primary-color;
+}
