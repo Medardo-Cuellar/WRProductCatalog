@@ -18,5 +18,5 @@ logInBtn.addEventListener("click", () => {
     "IIYjVc6YHTkJBCCFmGJH3FLqL4SLeIQyjWZFGDR5lWgUr0E1lTIGdjjTlfkvkRBUWYsDyOUP66GpJa8y1C7dST2K4DidLf8u070tqM8pWy8VZJgGpXW1aTrciChk30DykZAfYAStZRcoqZmuh6ifvXi0gM0E93mpR50AxssHt6G7zofoI02ob9evxkTHl7dlADFzcdZVuC8Ajd8rZde89DpTfd4gbwiyvDzj3DWOIhJY7XWyA7CVmte2oidR0KJ";
 
   localStorage.setItem("token", token);
-  window.open("../views/productos.html", "_self");
+  window.open("../views/products.html", "_self");
 });
