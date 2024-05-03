@@ -43,7 +43,7 @@ const createProductCard = (productObject) => {
     let cardButton = document.createElement("div");
     cardButton.classList.add("text-center");
     let button = document.createElement("a");
-    button.href = `../views/detail.html?productKey=${key}`;
+    button.href = `../views/details.html?productKey=${key}`;
     button.classList.add("btn", "btn-primary");
     button.innerText = "Ver detalle";
 
@@ -51,13 +51,14 @@ const createProductCard = (productObject) => {
     cardBody.append(cardTitle, cardDescription, cardPrice, cardButton);
     cardInside.append(cardImage, cardBody);
     card.append(cardInside);
+    console.log(card)
 
     return card;
 };
-
+/* 
 const printProducts = (productsArray, wrapperId) => {
     let wrapper = document.getElementById(wrapperId);
-    /* la siguiente línea debe ser reemplazada por el ciclo while que borra todos los childs de un elemento */
+    // la siguiente línea debe ser reemplazada por el ciclo while que borra todos los childs de un elemento 
     wrapper.innerHTML = "";
 
     productsArray.forEach((product) => {
@@ -65,10 +66,20 @@ const printProducts = (productsArray, wrapperId) => {
         wrapper.innerHTML = currentContent + createProductCard(product);
     });
 };
+ */
+
+const printProducts = (productsArray, wrapperId) => {
+    let wrapper = document.getElementById(wrapperId);
+    //wrapper.innerHTML = "";
+    productsArray.forEach((product) => {
+        wrapper.append(createProductCard(product));
+    });
+};
+
 
 const printAllProducts = async () => {
     let productsArray = await fetchAllProducts();
-    printProducts(productsArray, "products-wrapper");
+    printProducts(productsArray, "product-wrapper");
 };
 
 printAllProducts();

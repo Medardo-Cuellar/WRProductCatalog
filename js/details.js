@@ -19,7 +19,7 @@ const printProductData = async (productKey) => {
     name, description, price, picture
   } = productData;
 
-  document.getElementById("product-picture").setAttribute("src", picture);
+  document.getElementById("product-image").setAttribute("src", picture);
   document.getElementById("product-name").innerText = name;
   document.getElementById("product-description").innerText = description;
   document.getElementById("product-price").innerText = price;
