@@ -20,9 +20,8 @@ import { fetchAllProducts, deleteProduct } from "./modules/productsApi.js";
 
 */
 
-let editModal = bootstrap.Modal.getInstance(
-  document.getElementById("editModal")
-);
+const editModal = new bootstrap.Modal(document.getElementById('edit-product-modal'));
+
 
 const createProductCard = (productObject) => {
   let { name, description, price, key, picture } = productObject;
@@ -30,7 +29,7 @@ const createProductCard = (productObject) => {
   let card = document.createElement("div");
   card.classList.add("col");
   let cardInside = document.createElement("div");
-  cardInside.classList.add("card", "shadow", "h-100");
+  cardInside.classList.add("card", "shadow", "h-100", "mx-1");
   let cardImage = document.createElement("img");
   cardImage.src = picture;
   cardImage.classList.add("card-img-top");
@@ -55,9 +54,18 @@ const createProductCard = (productObject) => {
   button.innerText = "Ver detalle";
 
   //botón de editar producto
-/*   let editBtn = document.createElement("button");
+  let editBtn = document.createElement("button");
   editBtn.classList.add("btn", "btn-primary", "text-center");
-  editBtn.innerHTML = "&#x270E;"; */
+  editBtn.innerHTML = "&#x270E;";
+
+  editBtn.addEventListener("click", () => {
+    document.getElementById("edit-name").value = name;
+    document.getElementById("edit-description").value = description;
+    document.getElementById("edit-price").value = price;
+    document.getElementById("edit-picture").value = picture;
+    document.getElementById("save-changes-btn").dataset.productKey = key;
+    editModal.show();
+  });
 
   //botón de eliminar producto
   let deleteBtn = document.createElement("button");
@@ -70,7 +78,7 @@ const createProductCard = (productObject) => {
     printAllProducts();
   });
 
-  cardButton.append(button, deleteBtn);
+  cardButton.append(button, editBtn, deleteBtn);
   cardFooter.append(cardPrice, cardButton);
   cardBody.append(cardTitle, cardDescription, cardFooter);
   cardInside.append(cardImage, cardBody);
