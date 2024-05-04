@@ -106,8 +106,4 @@ const printAllProducts = async () => {
   printProducts(productsArray, "product-wrapper");
 };
 
-while(1)
-{
-  printAllProducts();
-  sleep(50);
-}	
+printAllProducts();
