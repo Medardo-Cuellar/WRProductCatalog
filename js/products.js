@@ -67,7 +67,7 @@ const createProductCard = (productObject) => {
   let button = document.createElement("a");
   button.href = `../views/details.html?productKey=${key}`;
   button.classList.add("btn", "btn-primary");
-  button.innerText = "Ver detalle";
+  button.innerText = "&#x1F50D;";
 
   //botón de editar producto
   let editBtn = document.createElement("button");
