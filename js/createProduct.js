@@ -22,6 +22,7 @@ saveProductBtn.addEventListener("click", async () => {
         break;
     }
   });
+  
   console.log(productObject);
   let savedProduct = await createProduct(productObject);
   console.log(savedProduct);

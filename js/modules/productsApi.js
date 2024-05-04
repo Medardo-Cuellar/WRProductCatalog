@@ -23,4 +23,12 @@ const fetchAllProducts = async () => {
   return productsArray;
 };
 
-export { createProduct, fetchProductByKey, fetchAllProducts };
+const deleteProduct = async (productKey) => {
+  let response = await fetch(`${BASE_URL}/${productKey}/.json`, {
+    method: "DELETE",
+  });
+  let data = await response.json();
+  return data;
+};
+
+export { createProduct, fetchProductByKey, fetchAllProducts, deleteProduct};

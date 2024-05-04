@@ -1,4 +1,4 @@
-import { fetchAllProducts } from "./modules/productsApi.js";
+import { fetchAllProducts, deleteProduct } from "./modules/productsApi.js";
 
 /* 
 
@@ -19,41 +19,65 @@ import { fetchAllProducts } from "./modules/productsApi.js";
 </div>
 
 */
+
+let editModal = bootstrap.Modal.getInstance(
+  document.getElementById("editModal")
+);
+
 const createProductCard = (productObject) => {
-    let { name, description, price, key, picture } = productObject;
+  let { name, description, price, key, picture } = productObject;
 
-    let card = document.createElement("div");
-    card.classList.add("col");
-    let cardInside = document.createElement("div");
-    cardInside.classList.add("card", "shadow");
-    let cardImage = document.createElement("img");
-    cardImage.src = picture;
-    cardImage.classList.add("card-img-top");
-    let cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
-    let cardTitle = document.createElement("h5");
-    cardTitle.classList.add("card-title", "text-start");
-    cardTitle.innerText = name;
-    let cardDescription = document.createElement("p");
-    cardDescription.classList.add("card-text", "text-center");
-    cardDescription.innerText = description;
-    let cardPrice = document.createElement("p");
-    cardPrice.classList.add("text-muted", "text-end");
-    cardPrice.innerText = `$${price}`;
-    let cardButton = document.createElement("div");
-    cardButton.classList.add("text-center");
-    let button = document.createElement("a");
-    button.href = `../views/details.html?productKey=${key}`;
-    button.classList.add("btn", "btn-primary");
-    button.innerText = "Ver detalle";
+  let card = document.createElement("div");
+  card.classList.add("col");
+  let cardInside = document.createElement("div");
+  cardInside.classList.add("card", "shadow", "h-100");
+  let cardImage = document.createElement("img");
+  cardImage.src = picture;
+  cardImage.classList.add("card-img-top");
+  let cardBody = document.createElement("div");
+  cardBody.classList.add("card-body", "d-flex", "flex-column");
+  let cardTitle = document.createElement("h5");
+  cardTitle.classList.add("card-title", "text-center", "card-header");
+  cardTitle.innerText = name;
+  let cardDescription = document.createElement("p");
+  cardDescription.classList.add("card-text", "text-start");
+  cardDescription.innerText = description;
+  let cardFooter = document.createElement("div");
+  cardFooter.classList.add("card-footer", "mt-auto");
+  let cardPrice = document.createElement("p");
+  cardPrice.classList.add("text-muted", "text-end");
+  cardPrice.innerText = `$${price}`;
+  let cardButton = document.createElement("div");
+  cardButton.classList.add("d-flex", "justify-content-end", "gap-2");
+  let button = document.createElement("a");
+  button.href = `../views/details.html?productKey=${key}`;
+  button.classList.add("btn", "btn-primary");
+  button.innerText = "Ver detalle";
 
-    cardButton.append(button);
-    cardBody.append(cardTitle, cardDescription, cardPrice, cardButton);
-    cardInside.append(cardImage, cardBody);
-    card.append(cardInside);
-    console.log(card)
+  //botón de editar producto
+/*   let editBtn = document.createElement("button");
+  editBtn.classList.add("btn", "btn-primary", "text-center");
+  editBtn.innerHTML = "&#x270E;"; */
 
-    return card;
+  //botón de eliminar producto
+  let deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("btn", "btn-danger", "text-center");
+
+  deleteBtn.innerHTML = "&#x1F5D1;";
+  deleteBtn.addEventListener("click", async () => {
+    let response = await deleteProduct(key);
+    document.getElementById("product-wrapper").innerHTML = "";
+    printAllProducts();
+  });
+
+  cardButton.append(button, deleteBtn);
+  cardFooter.append(cardPrice, cardButton);
+  cardBody.append(cardTitle, cardDescription, cardFooter);
+  cardInside.append(cardImage, cardBody);
+  card.append(cardInside);
+  console.log(card);
+
+  return card;
 };
 /* 
 const printProducts = (productsArray, wrapperId) => {
@@ -69,17 +93,21 @@ const printProducts = (productsArray, wrapperId) => {
  */
 
 const printProducts = (productsArray, wrapperId) => {
-    let wrapper = document.getElementById(wrapperId);
-    //wrapper.innerHTML = "";
-    productsArray.forEach((product) => {
-        wrapper.append(createProductCard(product));
-    });
+  let wrapper = document.getElementById(wrapperId);
+  //wrapper.innerHTML = "";
+  productsArray.forEach((product) => {
+    wrapper.append(createProductCard(product));
+  });
 };
 //https://stackoverflow.com/questions/56461743/getting-object-htmldivelement-instead-of-its-content
 
 const printAllProducts = async () => {
-    let productsArray = await fetchAllProducts();
-    printProducts(productsArray, "product-wrapper");
+  let productsArray = await fetchAllProducts();
+  printProducts(productsArray, "product-wrapper");
 };
 
-printAllProducts();
+while(1)
+{
+  printAllProducts();
+  sleep(50);
+}	
