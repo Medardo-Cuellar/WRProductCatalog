@@ -23,6 +23,15 @@ const fetchAllProducts = async () => {
   return productsArray;
 };
 
+const editProduct = async (productKey, productObject) => {
+  let response = await fetch(`${BASE_URL}/${productKey}/.json`, {
+    method: "PATCH",
+    body: JSON.stringify(productObject),
+  });
+  let data = await response.json();
+  return data;
+};
+
 const deleteProduct = async (productKey) => {
   let response = await fetch(`${BASE_URL}/${productKey}/.json`, {
     method: "DELETE",
@@ -31,4 +40,4 @@ const deleteProduct = async (productKey) => {
   return data;
 };
 
-export { createProduct, fetchProductByKey, fetchAllProducts, deleteProduct};
+export { createProduct, fetchProductByKey, fetchAllProducts, deleteProduct, editProduct};

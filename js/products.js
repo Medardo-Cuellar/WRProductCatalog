@@ -1,4 +1,4 @@
-import { fetchAllProducts, deleteProduct } from "./modules/productsApi.js";
+import { fetchAllProducts, deleteProduct, editProduct } from "./modules/productsApi.js";
 
 /* 
 
@@ -21,6 +21,22 @@ import { fetchAllProducts, deleteProduct } from "./modules/productsApi.js";
 */
 
 const editModal = new bootstrap.Modal(document.getElementById('edit-product-modal'));
+
+const saveChangesButton = document.getElementById("save-changes-btn");
+
+saveChangesButton.addEventListener("click", async () => {
+
+  let editFields = document.querySelectorAll("#edit-product-form input");
+  //console.log(editFields);
+  let productObject = {};
+  editFields.forEach(({name, value}) => {productObject[name] = value});
+  console.log(productObject);
+  await editProduct(saveChangesButton.dataset.productKey, productObject);
+  editModal.hide();
+  document.getElementById("product-wrapper").innerHTML = "";
+  printAllProducts();
+}) ;
+
 
 
 const createProductCard = (productObject) => {
