@@ -22,7 +22,7 @@ const printProductData = async (productKey) => {
   document.getElementById("product-image").setAttribute("src", picture);
   document.getElementById("product-name").innerText = name;
   document.getElementById("product-description").innerText = description;
-  document.getElementById("product-price").innerText = price;
+  document.getElementById("product-price").innerText = `$${price}.00`;
 };
 
 printProductData(productKey);
